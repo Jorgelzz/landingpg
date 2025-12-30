@@ -1,14 +1,20 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Mail, Phone, Linkedin, Github } from "lucide-react"
-import Link from "next/link"
-import { useLanguage } from "@/contexts/language-context"
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Mail, Phone, Linkedin, Github } from "lucide-react";
+import Link from "next/link";
+import { useLanguage } from "@/contexts/language-context";
 
 export function Contact() {
-  const { t } = useLanguage()
+  const { t } = useLanguage();
 
   const contactInfo = [
     {
@@ -22,7 +28,7 @@ export function Contact() {
       icon: Phone,
       label: t.contact.phone,
       value: "+55 41 99802-8345",
-      href: "tel:+5541998028345",
+      href: "https://wa.me/5541998028345?text=Olá!%20Gostaria%20de%20entrar%20em%20contato.",
       buttonText: t.contact.callNow,
     },
     {
@@ -39,12 +45,9 @@ export function Contact() {
       href: "https://github.com/Jorgelzz",
       buttonText: t.contact.viewProfile,
     },
-  ]
+  ];
   return (
-    <section
-      id="contact"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30"
-    >
+    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
       <div className="container mx-auto max-w-4xl">
         <div className="space-y-12">
           <div className="text-center space-y-4">
@@ -59,7 +62,7 @@ export function Contact() {
 
           <div className="grid gap-6 sm:grid-cols-2">
             {contactInfo.map((contact, index) => {
-              const Icon = contact.icon
+              const Icon = contact.icon;
               return (
                 <Card key={index} className="hover:shadow-lg transition-shadow">
                   <CardHeader>
@@ -77,7 +80,9 @@ export function Contact() {
                     <Button variant="outline" asChild className="w-full">
                       <Link
                         href={contact.href}
-                        target={contact.href.startsWith("http") ? "_blank" : undefined}
+                        target={
+                          contact.href.startsWith("http") ? "_blank" : undefined
+                        }
                         rel={
                           contact.href.startsWith("http")
                             ? "noopener noreferrer"
@@ -89,12 +94,11 @@ export function Contact() {
                     </Button>
                   </CardContent>
                 </Card>
-              )
+              );
             })}
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
-

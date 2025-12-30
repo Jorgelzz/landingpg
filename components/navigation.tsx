@@ -1,129 +1,102 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { LanguageToggle } from "@/components/language-toggle"
-import { useLanguage } from "@/contexts/language-context"
-import { Separator } from "@/components/ui/separator"
+import { useLanguage } from "@/contexts/language-context";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { useState } from "react";
+import { PDFModal } from "@/components/pdf-modal";
 
 export function Navigation() {
-  const { t, language } = useLanguage()
-  const [isOpen, setIsOpen] = React.useState(false)
-
-  const resumeHref = language === "pt" ? "/cvs/curriculo.pdf" : "/cvs/resume.pdf"
+  const { t, language } = useLanguage();
+  const [isActive, setIsActive] = useState(false);
+  const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
 
   const navItems = [
     { label: t.nav.home, href: "#home", isAnchor: true },
     { label: t.nav.about, href: "#about", isAnchor: true },
     { label: t.nav.projects, href: "#projects", isAnchor: true },
     { label: t.nav.contact, href: "#contact", isAnchor: true },
-    { label: t.nav.resume, href: resumeHref, isAnchor: false },
-  ]
+    {
+      label: t.nav.resume,
+      href: language === "pt" ? "/cvs/curriculo.pdf" : "/cvs/resume.pdf",
+      isAnchor: false,
+    },
+  ];
 
-  const handleNavClick = (href: string, isAnchor: boolean) => {
-    setIsOpen(false)
-    if (isAnchor) {
-      const element = document.querySelector(href)
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const id = href.slice(1); // Remove o #
+      const element = document.getElementById(id);
+      
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" })
+        // Calcula a altura da navbar dinamicamente
+        const navbar = document.querySelector('[class*="fixed"][class*="top-0"]');
+        const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 80;
+        
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = Math.max(0, elementPosition - navbarHeight);
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+
+        // Atualiza a URL sem recarregar a página
+        window.history.pushState(null, "", href);
       }
     }
-    // Se não for anchor, o link normal do <a> vai funcionar
-  }
+  };
 
   return (
-    <>
-      {/* Desktop Sidebar */}
-      <aside className="hidden md:flex fixed left-0 top-0 h-full w-64 flex-col border-r border-border bg-background/80 backdrop-blur-md z-50">
-        <div className="flex flex-col h-full p-6">
-          <div className="flex flex-col gap-6 flex-1 mt-8">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
+    <div className="fixed top-0 left-0 right-0 z-10 bg-background/80 backdrop-blur-sm border-b border-border">
+      <div className="container w-full mx-auto px-4 py-4">
+        <div className="flex justify-end gap-8">
+          {navItems.map((item, index) => {
+            const commonClassName = cn(
+              "text-xl font-bold transition-colors duration-300 text-blue-900",
+              isActive ? "hover:text-primary cursor-pointer" : "hover:text-secondary-foreground"
+            );
+            
+            if (item.isAnchor) {
+              return (
+                <a
+                  key={index}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className={commonClassName}
+                  onMouseEnter={() => setIsActive(true)}
+                  onMouseLeave={() => setIsActive(false)}
+                >
+                  {item.label}
+                </a>
+              );
+            }
+
+            // Resume link - open modal instead of navigating
+            return (
+              <button
+                key={index}
                 onClick={(e) => {
-                  if (item.isAnchor) {
-                    e.preventDefault()
-                    handleNavClick(item.href, item.isAnchor)
-                  }
+                  e.preventDefault();
+                  setIsPdfModalOpen(true);
                 }}
-                target={!item.isAnchor ? "_blank" : undefined}
-                rel={!item.isAnchor ? "noopener noreferrer" : undefined}
-                className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                className={commonClassName}
+                onMouseEnter={() => setIsActive(true)}
+                onMouseLeave={() => setIsActive(false)}
               >
                 {item.label}
-              </a>
-            ))}
-          </div>
-
-          <Separator className="my-4" />
-
-          <div className="flex items-center gap-2 justify-center">
-            <LanguageToggle />
-            <ThemeToggle />
-          </div>
+              </button>
+            );
+          })}
         </div>
-      </aside>
-
-      {/* Mobile Navigation */}
-      <nav className="md:hidden fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-        <div className="flex h-16 items-center justify-between px-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </Button>
-
-          <div className="flex items-center gap-2">
-            <LanguageToggle />
-            <ThemeToggle />
-          </div>
-        </div>
-
-        {/* Mobile Sidebar Overlay */}
-        {isOpen && (
-          <>
-            <div
-              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40"
-              onClick={() => setIsOpen(false)}
-            />
-            <aside className="fixed left-0 top-0 h-full w-64 flex-col border-r border-border bg-background z-50 transition-transform duration-300">
-              <div className="flex flex-col h-full p-6">
-                <div className="flex flex-col gap-4 flex-1 mt-16">
-                  {navItems.map((item) => (
-                    <a
-                      key={item.href}
-                      href={item.href}
-                      onClick={(e) => {
-                        if (item.isAnchor) {
-                          e.preventDefault()
-                          handleNavClick(item.href, item.isAnchor)
-                        }
-                      }}
-                      target={!item.isAnchor ? "_blank" : undefined}
-                      rel={!item.isAnchor ? "noopener noreferrer" : undefined}
-                      className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-                    >
-                      {item.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </aside>
-          </>
-        )}
-      </nav>
-    </>
-  )
+      </div>
+      <PDFModal
+        open={isPdfModalOpen}
+        onOpenChange={setIsPdfModalOpen}
+        pdfUrl={language === "pt" ? "/cvs/curriculo.pdf" : "/cvs/resume.pdf"}
+        title={t.nav.resume}
+      />
+    </div>
+  );
 }
-
