@@ -17,7 +17,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="flex min-h-screen items-center justify-center px-4 sm:px-6 lg:px-8 pt-16 md:pt-0"
+      className="flex min-h-screen items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 md:pt-24"
     >
       <div className="container mx-auto max-w-4xl">
         <div className="flex flex-col items-center text-center space-y-8">
