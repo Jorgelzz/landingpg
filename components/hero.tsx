@@ -28,6 +28,9 @@ export function Hero() {
             <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground">
               {t.hero.subtitle}
             </p>
+            <p className="text-lg sm:text-xl text-muted-foreground">
+              {t.hero.dba}
+            </p>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
               {t.hero.tech}
             </p>

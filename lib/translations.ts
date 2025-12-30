@@ -12,19 +12,21 @@ export const translations = {
     hero: {
       title: "Jorge Luiz",
       subtitle: "Desenvolvedor Fullstack",
-      tech: "Python, Django & TypeScript",
+      dba: "DBA",
+      tech: "Python, Django, TypeScript & DBA",
       description:
-        "Desenvolvedor com base principal em <strong>Python</strong>, <strong>Django</strong> e <strong>TypeScript</strong>. Meu foco é o <strong>Fullstack</strong>.",
+        "Desenvolvedor com base principal em <strong>Python</strong>, <strong>Django</strong> e <strong>TypeScript</strong>. Meus focos são <strong>Fullstack</strong> e <strong>DBA</strong> (Administração de Banco de Dados).",
       viewProjects: "Ver Projetos",
       getInTouch: "Entre em Contato",
     },
     about: {
       title: "Sobre Mim",
       description1:
-        "Olá, eu sou o Jorge Luiz. Desenvolvedor com base principal em <strong>Python</strong>, <strong>Django</strong> e <strong>TypeScript</strong>. Meu foco é o <strong>Fullstack</strong>.",
+        "Olá, eu sou o Jorge Luiz. Desenvolvedor com base principal em Python, Django e TypeScript. Meu foco é o Fullstack e DBA (Administração de Banco de Dados).",
       description2:
-        "Trabalho criando soluções web completas, desde o backend robusto até interfaces modernas e responsivas. Tenho experiência em desenvolvimento de sistemas web, APIs RESTful, e aplicações fullstack.",
+        "Trabalho criando soluções web completas, desde o backend robusto até interfaces modernas e responsivas. Tenho experiência em desenvolvimento de sistemas web, APIs RESTful, e aplicações fullstack. Também tenho interesse em DBA (Database Administration), trabalhando com otimização e gestão de bancos de dados.",
       techStack: "Tech Stack",
+      interests: "Interesses",
     },
     projects: {
       title: "Projetos em Destaque",
@@ -65,19 +67,21 @@ export const translations = {
     hero: {
       title: "Jorge Luiz",
       subtitle: "Fullstack Developer",
-      tech: "Python, Django & TypeScript",
+      dba: "DBA",
+      tech: "Python, Django, TypeScript & DBA",
       description:
-        "Developer with a main focus on <strong>Python</strong>, <strong>Django</strong>, and <strong>TypeScript</strong>. My focus is <strong>Fullstack</strong>.",
+        "Developer with a main focus on Python, Django and TypeScript. My focuses are Fullstack and DBA (Database Administration).",
       viewProjects: "View Projects",
       getInTouch: "Get In Touch",
     },
     about: {
       title: "About Me",
       description1:
-        "Hello, I'm Jorge Luiz. Developer with a main focus on <strong>Python</strong>, <strong>Django</strong>, and <strong>TypeScript</strong>. My focus is <strong>Fullstack</strong>.",
+        "Hello, I'm Jorge Luiz. Developer with a main focus on Python, Django and TypeScript. My focus is Fullstack and DBA (Database Administration).",
       description2:
-        "I work creating complete web solutions, from robust backends to modern and responsive interfaces. I have experience in web system development, RESTful APIs, and fullstack applications.",
+        "I work creating complete web solutions, from robust backends to modern and responsive interfaces. I have experience in web system development, RESTful APIs, and fullstack applications. I also have an interest in DBA (Database Administration), working with database optimization and management.",
       techStack: "Tech Stack",
+      interests: "Interests",
     },
     projects: {
       title: "Featured Projects",

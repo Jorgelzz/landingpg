@@ -15,12 +15,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jorge Luiz - Fullstack Developer",
+  title: "Jorge Luiz - Portfolio ",
   description: "Fullstack Developer specializing in Python, Django, and TypeScript. Building modern web applications and solutions.",
-  keywords: ["Jorge Luiz", "Fullstack Developer", "Python", "Django", "TypeScript", "React", "Web Development"],
+  keywords: ["Jorge Luiz", "Portfolio", "Fullstack Developer", "Python", "Django", "TypeScript", "React", "Web Development", "DBA"],
   authors: [{ name: "Jorge Luiz" }],
   openGraph: {
-    title: "Jorge Luiz - Fullstack Developer",
+    title: "Jorge Luiz - Portfolio",
     description: "Fullstack Developer specializing in Python, Django, and TypeScript",
     type: "website",
   },

@@ -13,6 +13,7 @@ const skills = [
   "PostgreSQL",
   "MySQL",
   "Docker",
+  "DBA",
 ]
 
 export function About() {
