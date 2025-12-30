@@ -3,8 +3,10 @@
 import { Button } from "@/components/ui/button"
 import { ArrowDown, Github, Linkedin, Mail, Phone } from "lucide-react"
 import Link from "next/link"
+import { useLanguage } from "@/contexts/language-context"
 
 export function Hero() {
+  const { t } = useLanguage()
   const scrollToSection = (id: string) => {
     const element = document.querySelector(id)
     if (element) {
@@ -21,21 +23,20 @@ export function Hero() {
         <div className="flex flex-col items-center text-center space-y-8">
           <div className="space-y-4">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-              Jorge Luiz
+              {t.hero.title}
             </h1>
             <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground">
-              Fullstack Developer
+              {t.hero.subtitle}
             </p>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Python, Django & TypeScript
+              {t.hero.tech}
             </p>
           </div>
 
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Desenvolvedor com base principal em <strong>Python</strong>,{" "}
-            <strong>Django</strong> e <strong>TypeScript</strong>. Meu foco é o{" "}
-            <strong>Fullstack</strong>.
-          </p>
+          <p
+            className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: t.hero.description }}
+          />
 
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <Button
@@ -43,7 +44,7 @@ export function Hero() {
               onClick={() => scrollToSection("#projects")}
               className="w-full sm:w-auto"
             >
-              View Projects
+              {t.hero.viewProjects}
             </Button>
             <Button
               variant="outline"
@@ -51,7 +52,7 @@ export function Hero() {
               onClick={() => scrollToSection("#contact")}
               className="w-full sm:w-auto"
             >
-              Get In Touch
+              {t.hero.getInTouch}
             </Button>
           </div>
 

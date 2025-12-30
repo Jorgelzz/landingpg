@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Card,
   CardContent,
@@ -11,18 +13,14 @@ import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 import { Github, ExternalLink } from "lucide-react"
 import Link from "next/link"
+import { useLanguage } from "@/contexts/language-context"
 
-const projects = [
-  {
-    title: "OrganizaAí (5S)",
-    description:
-      "Sistema web para auditoria 5S em empresas. Desenvolvido com Django no backend e React no frontend, oferecendo uma solução completa para gestão e auditoria de processos 5S.",
-    tech: ["Django", "React", "Python", "PostgreSQL"],
-    githubUrl: "https://github.com/Jorgelzz/Kaizen-backend/tree/main/app5sHome",
-  },
-]
+const techStack = {
+  "OrganizaAí (5S)": ["Django", "React", "Python", "PostgreSQL"],
+}
 
 export function Projects() {
+  const { t } = useLanguage()
   return (
     <section
       id="projects"
@@ -32,16 +30,16 @@ export function Projects() {
         <div className="space-y-12">
           <div className="text-center space-y-4">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Featured Projects
+              {t.projects.title}
             </h2>
             <Separator className="mx-auto w-24" />
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Alguns dos projetos em destaque que desenvolvi
+              {t.projects.subtitle}
             </p>
           </div>
 
           <div className="flex justify-center gap-6 flex-wrap">
-            {projects.map((project, index) => (
+            {t.projects.projects.map((project, index) => (
               <Card key={index} className="flex flex-col w-full max-w-md">
                 <CardHeader>
                   <CardTitle>{project.title}</CardTitle>
@@ -51,7 +49,7 @@ export function Projects() {
                 </CardHeader>
                 <CardContent className="flex-1">
                   <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
+                    {(techStack[project.title as keyof typeof techStack] || []).map((tech) => (
                       <Badge key={tech} variant="outline">
                         {tech}
                       </Badge>
@@ -61,12 +59,12 @@ export function Projects() {
                 <CardFooter className="gap-2 justify-center">
                   <Button variant="outline" asChild className="flex-1">
                     <Link
-                      href={project.githubUrl}
+                      href="https://github.com/Jorgelzz/Kaizen-backend/tree/main/app5sHome"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <Github className="mr-2 h-4 w-4" />
-                      View Code
+                      {t.projects.viewCode}
                     </Link>
                   </Button>
                 </CardFooter>

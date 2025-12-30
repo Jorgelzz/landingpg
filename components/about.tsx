@@ -1,5 +1,8 @@
+"use client"
+
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
+import { useLanguage } from "@/contexts/language-context"
 
 const skills = [
   "Python",
@@ -13,6 +16,7 @@ const skills = [
 ]
 
 export function About() {
+  const { t } = useLanguage()
   return (
     <section
       id="about"
@@ -22,28 +26,24 @@ export function About() {
         <div className="space-y-8">
           <div className="text-center space-y-4">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              About Me
+              {t.about.title}
             </h2>
             <Separator className="mx-auto w-24" />
           </div>
 
           <div className="space-y-6 text-center sm:text-left">
+            <p
+              className="text-lg text-muted-foreground leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: t.about.description1 }}
+            />
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Olá, eu sou o Jorge Luiz. Desenvolvedor com base principal em{" "}
-              <strong>Python</strong>, <strong>Django</strong> e{" "}
-              <strong>TypeScript</strong>. Meu foco é o <strong>Fullstack</strong>.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Trabalho criando soluções web completas, desde o backend robusto
-              até interfaces modernas e responsivas. Tenho experiência em
-              desenvolvimento de sistemas web, APIs RESTful, e aplicações
-              fullstack.
+              {t.about.description2}
             </p>
           </div>
 
           <div className="space-y-6">
             <div className="text-center sm:text-left">
-              <h3 className="text-2xl font-semibold mb-4">Tech Stack</h3>
+              <h3 className="text-2xl font-semibold mb-4">{t.about.techStack}</h3>
               <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
                 {skills.map((skill) => (
                   <Badge

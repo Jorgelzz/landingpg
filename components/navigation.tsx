@@ -5,18 +5,21 @@ import { FileText, Link, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/theme-toggle"
-
-const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
-  { label: "Resume", href: "/resume.pdf" },
-]
+import { LanguageToggle } from "@/components/language-toggle"
+import { useLanguage } from "@/contexts/language-context"
 
 export function Navigation() {
+  const { t } = useLanguage()
   const [isOpen, setIsOpen] = React.useState(false)
   const [scrolled, setScrolled] = React.useState(false)
+
+  const navItems = [
+    { label: t.nav.home, href: "#home" },
+    { label: t.nav.about, href: "#about" },
+    { label: t.nav.projects, href: "#projects" },
+    { label: t.nav.contact, href: "#contact" },
+    { label: t.nav.resume, href: "/resume.pdf" },
+  ]
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -37,7 +40,7 @@ export function Navigation() {
   return (
     <nav
       className={cn(
-        "flex justify-center top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
           ? "bg-background/80 backdrop-blur-md border-b border-border shadow-sm"
           : "bg-transparent"
@@ -71,11 +74,13 @@ export function Navigation() {
                 {item.label}
               </a>
             ))}
+            <LanguageToggle />
             <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 md:hidden">
+            <LanguageToggle />
             <ThemeToggle />
             <Button
               variant="ghost"

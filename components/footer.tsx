@@ -1,8 +1,12 @@
+"use client"
+
 import { Github, Linkedin, Mail, Phone } from "lucide-react"
 import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
+import { useLanguage } from "@/contexts/language-context"
 
 export function Footer() {
+  const { t } = useLanguage()
   const currentYear = new Date().getFullYear()
 
   return (
@@ -47,7 +51,7 @@ export function Footer() {
           <Separator className="w-24" />
 
           <p className="text-sm text-muted-foreground text-center">
-            © {currentYear} Jorge Luiz. All rights reserved.
+            {t.footer.copyright.replace("{year}", currentYear.toString())}
           </p>
         </div>
       </div>
