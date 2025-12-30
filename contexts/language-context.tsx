@@ -29,11 +29,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("language", lang)
   }
 
-  const t = translations[language]
-
   return (
     <LanguageContext.Provider
-      value={{ language, setLanguage: handleSetLanguage, t }}
+      value={{ language, setLanguage: handleSetLanguage, t: translations[language as keyof typeof translations] as Translations }}
     >
       {children}
     </LanguageContext.Provider>
