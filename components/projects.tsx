@@ -16,7 +16,7 @@ import Link from "next/link"
 import { useLanguage } from "@/contexts/language-context"
 
 const techStack = {
-  "OrganizaAí (5S)": ["Django", "React", "Python", "PostgreSQL"],
+  "Kaizen (5S)": ["Django", "React", "Python", "PostgreSQL"],
 }
 
 export function Projects() {
@@ -59,7 +59,7 @@ export function Projects() {
                 <CardFooter className="gap-2 justify-center">
                   <Button variant="outline" asChild className="flex-1">
                     <Link
-                      href="https://github.com/Jorgelzz/Kaizen-backend/tree/main/app5sHome"
+                      href="https://github.com/Jorgelzz/Kaizen-backend/"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
