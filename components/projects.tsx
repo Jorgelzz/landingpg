@@ -16,7 +16,7 @@ import Link from "next/link"
 import { useLanguage } from "@/contexts/language-context"
 
 const techStack = {
-  "Kaizen (5S)": ["Django", "React", "Python", "PostgreSQL"],
+  "OrganizaAí (5S)": ["Django", "React", "Python", "PostgreSQL"],
 }
 
 export function Projects() {
@@ -38,37 +38,49 @@ export function Projects() {
             </p>
           </div>
 
-          <div className="flex justify-center gap-6 flex-wrap">
+          <div className="space-y-8">
             {t.projects.projects.map((project, index) => (
-              <Card key={index} className="flex flex-col w-full max-w-md">
-                <CardHeader>
-                  <CardTitle>{project.title}</CardTitle>
-                  <CardDescription className="text-base">
-                    {project.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <div className="flex flex-wrap gap-2">
-                    {(techStack[project.title as keyof typeof techStack] || []).map((tech) => (
-                      <Badge key={tech} variant="outline">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-                <CardFooter className="gap-2 justify-center">
-                  <Button variant="outline" asChild className="flex-1">
-                    <Link
-                      href="https://github.com/Jorgelzz/Kaizen-backend/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Github className="mr-2 h-4 w-4" />
-                      {t.projects.viewCode}
-                    </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
+              <div key={index} className="space-y-4">
+                <Card className="flex flex-col w-full">
+                  <CardHeader>
+                    <CardTitle className="text-2xl">{project.title}</CardTitle>
+                    <CardDescription className="text-base">
+                      {project.description}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex-1 space-y-4">
+                    <div className="prose prose-sm dark:prose-invert max-w-none">
+                      <p className="text-base text-muted-foreground leading-relaxed">
+                        {project.detailedDescription}
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="text-lg font-semibold">
+                        {t.projects.technologiesLabel}
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {(techStack[project.title as keyof typeof techStack] || []).map((tech) => (
+                          <Badge key={tech} variant="outline">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </CardContent>
+                  <CardFooter className="gap-2 justify-center">
+                    <Button variant="outline" asChild className="flex-1">
+                      <Link
+                        href="https://github.com/Jorgelzz/Kaizen-backend/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Github className="mr-2 h-4 w-4" />
+                        {t.projects.viewCode}
+                      </Link>
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </div>
             ))}
           </div>
         </div>

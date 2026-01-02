@@ -25,8 +25,8 @@ export function Hero() {
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
               {t.hero.title}
             </h1>
-            <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground">
-              {t.hero.subtitle}
+            <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground font-semibold">
+              {t.hero.subtitle} & {t.hero.dba}
             </p>
             <p className="text-lg sm:text-xl text-muted-foreground">
               {t.hero.dba}
@@ -59,39 +59,53 @@ export function Hero() {
             </Button>
           </div>
 
-          <div className="flex gap-4 pt-4">
-            <Link
-              href="https://github.com/Jorgelzz"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="GitHub"
-            >
-              <Github className="h-6 w-6" />
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/jorge-luiz-lima-de-oliveira/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="h-6 w-6" />
-            </Link>
-            <Link
-              href="mailto:Jorgeluiz2027@hotmail.com"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Email"
-            >
-              <Mail className="h-6 w-6" />
-            </Link>
-            <Link
-              href="tel:+5541998028345"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Phone"
-            >
-              <Phone className="h-6 w-6" />
-            </Link>
+          <div className="space-y-4 pt-4">
+            <p className="text-sm text-muted-foreground">
+              {t.hero.connectCTA}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+              <Button
+                variant="default"
+                size="lg"
+                asChild
+                className="w-full sm:w-auto"
+              >
+                <Link
+                  href="https://www.linkedin.com/in/jorge-luiz-lima-de-oliveira/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Linkedin className="mr-2 h-5 w-5" />
+                  LinkedIn
+                </Link>
+              </Button>
+              <Button
+                variant="default"
+                size="lg"
+                asChild
+                className="w-full sm:w-auto"
+              >
+                <Link
+                  href="https://github.com/Jorgelzz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Github className="mr-2 h-5 w-5" />
+                  GitHub
+                </Link>
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                asChild
+                className="w-full sm:w-auto"
+              >
+                <Link href="mailto:Jorgeluiz2027@hotmail.com">
+                  <Mail className="mr-2 h-5 w-5" />
+                  Email
+                </Link>
+              </Button>
+            </div>
           </div>
 
           <div className="pt-8">

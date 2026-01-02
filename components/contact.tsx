@@ -58,6 +58,9 @@ export function Contact() {
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               {t.contact.subtitle}
             </p>
+            <p className="text-base text-muted-foreground max-w-2xl mx-auto font-medium">
+              {t.contact.cta}
+            </p>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2">
@@ -77,7 +80,11 @@ export function Contact() {
                     <CardDescription className="text-base mb-4">
                       {contact.value}
                     </CardDescription>
-                    <Button variant="outline" asChild className="w-full">
+                    <Button 
+                      variant={contact.label === t.contact.linkedin || contact.label === t.contact.github ? "default" : "outline"} 
+                      asChild 
+                      className="w-full"
+                    >
                       <Link
                         href={contact.href}
                         target={
@@ -89,7 +96,11 @@ export function Contact() {
                             : undefined
                         }
                       >
-                        {contact.buttonText}
+                        {contact.label === t.contact.linkedin 
+                          ? t.contact.connectLinkedIn
+                          : contact.label === t.contact.github
+                          ? t.contact.viewGitHub
+                          : contact.buttonText}
                       </Link>
                     </Button>
                   </CardContent>

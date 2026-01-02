@@ -40,6 +40,9 @@ export function About() {
             <p className="text-lg text-muted-foreground leading-relaxed">
               {t.about.description2}
             </p>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              {t.about.description3}
+            </p>
           </div>
 
           <div className="space-y-6">
