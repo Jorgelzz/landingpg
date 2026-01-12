@@ -19,6 +19,7 @@ export const translations = {
         "Desenvolvedor com base principal em <strong>Python</strong>, <strong>Django</strong> e <strong>TypeScript</strong>. Meus focos são <strong>Fullstack</strong> e <strong>DBA</strong> (Administração de Banco de Dados).",
       viewProjects: "Ver Projetos",
       getInTouch: "Entre em Contato",
+      downloadResume: "Baixar Currículo",
       connectCTA: "Conecte-se comigo para oportunidades profissionais:",
     },
     about: {
@@ -85,6 +86,7 @@ export const translations = {
         "Developer with a main focus on Python, Django and TypeScript. My focuses are Fullstack and DBA (Database Administration).",
       viewProjects: "View Projects",
       getInTouch: "Get In Touch",
+      downloadResume: "Download Resume",
       connectCTA: "Connect with me for professional opportunities:",
     },
     about: {

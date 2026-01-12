@@ -4,13 +4,11 @@ import { useLanguage } from "@/contexts/language-context";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useState } from "react";
-import { PDFModal } from "@/components/pdf-modal";
 import { Menu, X } from "lucide-react";
 
 export function Navigation() {
   const { t, language } = useLanguage();
   const [isActive, setIsActive] = useState(false);
-  const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
@@ -53,20 +51,43 @@ export function Navigation() {
     }
   };
 
-  const handleResumeClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleResumeClick = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
     e.preventDefault();
-    setIsPdfModalOpen(true);
+    // Trigger download instead of opening modal
+    const pdfUrl = language === "pt" ? "/cvs/curriculo.pdf" : "/cvs/resume.pdf";
+    const link = document.createElement("a");
+    link.href = pdfUrl;
+    link.download = language === "pt" ? "curriculo.pdf" : "resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
     setIsMobileMenuOpen(false);
   };
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50 shadow-sm">
         <div className="container w-full mx-auto px-4 py-3 sm:py-4">
           <div className="flex items-center justify-between">
+            {/* Logo/Nome com efeito tech */}
+            <div className="flex items-center">
+              <Link
+                href="#home"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(e as any, "#home");
+                }}
+                className="group flex items-center font-mono text-lg font-semibold hover:text-primary transition-colors duration-300"
+              >
+                <span className="text-primary/80 group-hover:text-primary transition-colors">&lt;</span>
+                <span className="mx-1.5 text-foreground group-hover:text-primary transition-colors">Jorge</span>
+                <span className="text-primary/80 group-hover:text-primary transition-colors">/&gt;</span>
+              </Link>
+            </div>
+
             {/* Mobile menu button */}
             <button
-              className="md:hidden text-blue-900 hover:text-primary transition-colors p-2"
+              className="md:hidden text-foreground hover:text-primary transition-colors p-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
               aria-expanded={isMobileMenuOpen}
@@ -82,8 +103,11 @@ export function Navigation() {
             <div className="hidden md:flex justify-end gap-4 lg:gap-8 w-full">
               {navItems.map((item, index) => {
                 const commonClassName = cn(
-                  "text-base lg:text-xl font-bold transition-colors duration-300 text-blue-900",
-                  isActive ? "hover:text-primary cursor-pointer" : "hover:text-secondary-foreground"
+                  "text-base lg:text-xl font-semibold transition-all duration-300",
+                  "text-foreground/80 hover:text-primary hover:scale-105",
+                  "relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5",
+                  "after:bg-primary after:transition-all after:duration-300",
+                  "hover:after:w-full"
                 );
                 
                 if (item.isAnchor) {
@@ -101,17 +125,19 @@ export function Navigation() {
                   );
                 }
 
-                // Resume link - open modal instead of navigating
+                // Resume link - download instead of opening modal
                 return (
-                  <button
+                  <a
                     key={index}
+                    href={item.href}
                     onClick={handleResumeClick}
                     className={commonClassName}
                     onMouseEnter={() => setIsActive(true)}
                     onMouseLeave={() => setIsActive(false)}
+                    download
                   >
                     {item.label}
-                  </button>
+                  </a>
                 );
               })}
             </div>
@@ -128,8 +154,11 @@ export function Navigation() {
           <div className="container mx-auto px-4 py-4 space-y-3">
             {navItems.map((item, index) => {
               const mobileClassName = cn(
-                "block text-lg font-bold transition-colors duration-300 text-blue-900 py-2",
-                isActive ? "hover:text-primary" : "hover:text-secondary-foreground"
+                "block text-lg font-semibold transition-all duration-300",
+                "text-foreground/80 hover:text-primary py-2",
+                "relative after:absolute after:bottom-2 after:left-0 after:w-0 after:h-0.5",
+                "after:bg-primary after:transition-all after:duration-300",
+                "hover:after:w-full"
               );
               
               if (item.isAnchor) {
@@ -145,27 +174,22 @@ export function Navigation() {
                 );
               }
 
-              // Resume link - open modal instead of navigating
+              // Resume link - download instead of opening modal
               return (
-                <button
+                <a
                   key={index}
+                  href={item.href}
                   onClick={handleResumeClick}
                   className={cn(mobileClassName, "w-full text-left")}
+                  download
                 >
                   {item.label}
-                </button>
+                </a>
               );
             })}
           </div>
         </div>
       </nav>
-
-      <PDFModal
-        open={isPdfModalOpen}
-        onOpenChange={setIsPdfModalOpen}
-        pdfUrl={language === "pt" ? "/cvs/curriculo.pdf" : "/cvs/resume.pdf"}
-        title={t.nav.resume}
-      />
     </>
   );
 }

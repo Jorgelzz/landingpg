@@ -1,12 +1,13 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowDown, Github, Linkedin, Mail, Phone } from "lucide-react"
+import { ArrowDown, Github, Linkedin, Mail, Phone, Download } from "lucide-react"
 import Link from "next/link"
 import { useLanguage } from "@/contexts/language-context"
+import { ScrollAnimate } from "@/components/scroll-animate"
 
 export function Hero() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const scrollToSection = (id: string) => {
     const element = document.querySelector(id)
     if (element) {
@@ -17,96 +18,115 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="flex min-h-screen items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 md:pt-24"
+      className="flex min-h-screen items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 md:pt-24 bg-gradient-to-b from-background via-background/95 to-muted/30 dark:from-background dark:via-background/98 dark:to-muted/20"
     >
       <div className="container mx-auto max-w-4xl">
         <div className="flex flex-col items-center text-center space-y-8">
-          <div className="space-y-4">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-              {t.hero.title}
-            </h1>
-            <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground font-semibold">
-              {t.hero.subtitle} & {t.hero.dba}
-            </p>
-            <p className="text-lg sm:text-xl text-muted-foreground">
-              {t.hero.dba}
-            </p>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              {t.hero.tech}
-            </p>
-          </div>
+          <ScrollAnimate animation="slide-up">
+            <div className="space-y-4">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+                {t.hero.title}
+              </h1>
+              <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground font-semibold">
+                {t.hero.subtitle} & {t.hero.dba}
+              </p>
+              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+                {t.hero.tech}
+              </p>
+            </div>
+          </ScrollAnimate>
 
-          <p
-            className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: t.hero.description }}
-          />
+          <ScrollAnimate animation="fade-in" delay={1}>
+            <p
+              className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: t.hero.description }}
+            />
+          </ScrollAnimate>
 
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-            <Button
-              size="lg"
-              onClick={() => scrollToSection("#projects")}
-              className="w-full sm:w-auto"
-            >
-              {t.hero.viewProjects}
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => scrollToSection("#contact")}
-              className="w-full sm:w-auto"
-            >
-              {t.hero.getInTouch}
-            </Button>
-          </div>
-
-          <div className="space-y-4 pt-4">
-            <p className="text-sm text-muted-foreground">
-              {t.hero.connectCTA}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+          <ScrollAnimate animation="scale-in" delay={2}>
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <Button
-                variant="default"
                 size="lg"
-                asChild
+                onClick={() => scrollToSection("#projects")}
                 className="w-full sm:w-auto"
               >
-                <Link
-                  href="https://www.linkedin.com/in/jorge-luiz-lima-de-oliveira/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Linkedin className="mr-2 h-5 w-5" />
-                  LinkedIn
-                </Link>
-              </Button>
-              <Button
-                variant="default"
-                size="lg"
-                asChild
-                className="w-full sm:w-auto"
-              >
-                <Link
-                  href="https://github.com/Jorgelzz"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Github className="mr-2 h-5 w-5" />
-                  GitHub
-                </Link>
+                {t.hero.viewProjects}
               </Button>
               <Button
                 variant="outline"
                 size="lg"
+                onClick={() => scrollToSection("#contact")}
+                className="w-full sm:w-auto"
+              >
+                {t.hero.getInTouch}
+              </Button>
+              <Button
+                variant="default"
+                size="lg"
                 asChild
                 className="w-full sm:w-auto"
               >
-                <Link href="mailto:Jorgeluiz2027@hotmail.com">
-                  <Mail className="mr-2 h-5 w-5" />
-                  Email
-                </Link>
+                <a
+                  href={language === "pt" ? "/cvs/curriculo.pdf" : "/cvs/resume.pdf"}
+                  download
+                >
+                  <Download className="mr-2 h-4 w-4" />
+                  {t.hero.downloadResume}
+                </a>
               </Button>
             </div>
-          </div>
+          </ScrollAnimate>
+
+          <ScrollAnimate animation="fade-in" delay={3}>
+            <div className="space-y-4 pt-4">
+              <p className="text-sm text-muted-foreground">
+                {t.hero.connectCTA}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                <Button
+                  variant="default"
+                  size="lg"
+                  asChild
+                  className="w-full sm:w-auto"
+                >
+                  <Link
+                    href="https://www.linkedin.com/in/jorge-luiz-lima-de-oliveira/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Linkedin className="mr-2 h-5 w-5" />
+                    LinkedIn
+                  </Link>
+                </Button>
+                <Button
+                  variant="default"
+                  size="lg"
+                  asChild
+                  className="w-full sm:w-auto"
+                >
+                  <Link
+                    href="https://github.com/Jorgelzz"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Github className="mr-2 h-5 w-5" />
+                    GitHub
+                  </Link>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  asChild
+                  className="w-full sm:w-auto"
+                >
+                  <Link href="mailto:Jorgeluiz2027@hotmail.com">
+                    <Mail className="mr-2 h-5 w-5" />
+                    Email
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </ScrollAnimate>
 
           <div className="pt-8">
             <button
