@@ -53,14 +53,6 @@ export function Hero() {
                 {t.hero.viewProjects}
               </Button>
               <Button
-                variant="outline"
-                size="lg"
-                onClick={() => scrollToSection("#contact")}
-                className="w-full sm:w-auto"
-              >
-                {t.hero.getInTouch}
-              </Button>
-              <Button
                 variant="default"
                 size="lg"
                 asChild
